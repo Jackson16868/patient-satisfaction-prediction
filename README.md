@@ -1,24 +1,40 @@
-# Patient Satisfaction Prediction — Hospital Management Dataset
+🚑 Patient Satisfaction Prediction
+Predicting Hospital Patient Satisfaction Using Operational Data (Beds, Demand, Staff Morale)
+Overview
 
-This repository contains data analysis and machine learning experiments to
-predict **patient satisfaction** based on hospital operational metrics.
+This repository demonstrates a data-driven framework to predict patient satisfaction based on operational hospital indicators, including bed supply, admission pressure, refusal counts, and staff morale.
 
-The goal of this project is to:
-- Perform exploratory data analysis (EDA)
-- Build ML models to predict `patient_satisfaction`
-- Compare Linear Regression baseline vs. Random Forest
-- Identify key features that drive satisfaction (KPI analysis)
+The project evaluates three machine learning models:
 
----
+Linear Regression (Baseline)
 
-## Dataset
+Random Forest Regressor
 
-Source: Kaggle — Hospital Beds / Management dataset  
-Dataset tables example:
-- `services_weekly.csv`: weekly operational KPIs  
-  - available_beds
-  - patients_request
-  - patients_admitted
-  - patients_refused
-  - staff_morale
-  - patient_satisfaction
+XGBoost
+
+The objective is to determine whether patient satisfaction can be accurately predicted and to identify key operational drivers for hospital management decisions.
+
+📊 Key Results
+Model	MAE	RMSE	R²
+Linear Regression	8.9753	10.6345	0.0043
+XGBoost	9.1564	11.3030	-0.1248
+⭐ Random Forest	⭐ 0.1340	⭐ 0.1704	⭐ 0.9563
+
+Conclusion:
+➡️ Patient satisfaction is non-linear
+➡️ Random Forest overwhelmingly outperforms other models
+➡️ Staff morale is the most critical feature
+
+🧠 Feature Importance (Random Forest)
+
+Staff Morale
+
+Available Beds
+
+Admitted Patients
+
+Patient Requests
+
+Refusals
+
+Human factors matter more than physical bed supply — improving morale yields the highest ROI.
