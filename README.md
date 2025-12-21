@@ -1,40 +1,39 @@
-🚑 Patient Satisfaction Prediction
-Predicting Hospital Patient Satisfaction Using Operational Data (Beds, Demand, Staff Morale)
-Overview
+# Patient Satisfaction Prediction
 
-This repository demonstrates a data-driven framework to predict patient satisfaction based on operational hospital indicators, including bed supply, admission pressure, refusal counts, and staff morale.
+Hospital Operational Data Machine Learning Study
 
-The project evaluates three machine learning models:
+## Overview
 
-Linear Regression (Baseline)
+This repository builds a machine learning pipeline that predicts patient satisfaction using operational hospital variables such as bed availability, service demand, admission volume, refusal counts, and staff morale.
 
-Random Forest Regressor
+Three regression models were compared to evaluate prediction performance and identify the most suitable method:
 
-XGBoost
+* Linear Regression (baseline)
+* Random Forest Regressor
+* XGBoost
 
-The objective is to determine whether patient satisfaction can be accurately predicted and to identify key operational drivers for hospital management decisions.
+The goal is to generate actionable insights for hospital resource allocation and management decisions.
 
-📊 Key Results
-Model	MAE	RMSE	R²
-Linear Regression	8.9753	10.6345	0.0043
-XGBoost	9.1564	11.3030	-0.1248
-⭐ Random Forest	⭐ 0.1340	⭐ 0.1704	⭐ 0.9563
+## Key Results
 
-Conclusion:
-➡️ Patient satisfaction is non-linear
-➡️ Random Forest overwhelmingly outperforms other models
-➡️ Staff morale is the most critical feature
+Random Forest performs significantly better than linear and boosting methods, demonstrating that patient satisfaction is driven by nonlinear interactions.
 
-🧠 Feature Importance (Random Forest)
+Performance comparison:
 
-Staff Morale
+| Model             |    MAE |    RMSE |      R2 |
+| ----------------- | -----: | ------: | ------: |
+| Linear Regression | 8.9753 | 10.6345 |  0.0043 |
+| XGBoost           | 9.1564 | 11.3030 | -0.1248 |
+| Random Forest     | 0.1340 |  0.1704 |  0.9563 |
 
-Available Beds
+## Feature Importance
 
-Admitted Patients
+Top drivers based on Random Forest:
 
-Patient Requests
+1. Staff Morale
+2. Available Beds
+3. Admitted Patients
+4. Patient Requests
+5. Refused Patients
 
-Refusals
 
-Human factors matter more than physical bed supply — improving morale yields the highest ROI.
