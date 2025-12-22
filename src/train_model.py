@@ -45,28 +45,44 @@ def load_data(data_path: str) -> pd.DataFrame:
 
 
 def prepare_features(df: pd.DataFrame):
-    """
-    Select features and target.
-    Adjust column names here if your CSV is different.
-    """
+    df_ext = df.copy()
+    import numpy as np
+
+    df_ext["refused_rate"] = df_ext["patients_refused"] / df_ext["patients_request"].replace(0, np.nan)
+    df_ext["admit_rate"] = df_ext["patients_admitted"] / df_ext["patients_request"].replace(0, np.nan)
+    df_ext["bed_load"] = df_ext["patients_admitted"] / df_ext["available_beds"].replace(0, np.nan)
+    df_ext["total_load"] = (df_ext["patients_admitted"] + df_ext["patients_refused"]) / df_ext["available_beds"].replace(0, np.nan)
+    df_ext["morale_change"] = df_ext["staff_morale"].diff()
+
+    # 如果有 date 欄位，就加時間特徵
+    if "date" in df_ext.columns:
+        df_ext["date"] = pd.to_datetime(df_ext["date"])
+        df_ext["month"] = df_ext["date"].dt.month
+        df_ext["quarter"] = (df_ext["month"] - 1) // 3 + 1
+
+    df_ext = df_ext.fillna(0)
+
     feature_cols = [
         "available_beds",
         "patients_request",
         "patients_admitted",
         "patients_refused",
         "staff_morale",
+        "refused_rate",
+        "admit_rate",
+        "bed_load",
+        "total_load",
+        "morale_change",
+        # 視情況加入：
+        # "month",
+        # "quarter",
     ]
     target_col = "patient_satisfaction"
 
-    # Safety check
-    missing_cols = [c for c in feature_cols + [target_col] if c not in df.columns]
-    if missing_cols:
-        raise ValueError(f"Missing columns in dataset: {missing_cols}")
-
-    X = df[feature_cols]
-    y = df[target_col]
-
+    X = df_ext[feature_cols]
+    y = df_ext[target_col]
     return X, y, feature_cols
+
 
 
 def train_test_split_data(X, y, test_size=0.2, random_state=42):
